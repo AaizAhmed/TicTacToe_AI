@@ -15,13 +15,12 @@ public class TicTacToe {
 	 */
 	public TicTacToe () 
 	{
-		board = new char [3][3];
+		this.board = new char [3][3];
 
-		for ( int i = 0; i < 3; i++ ) 
-		{
-			for (int j = 0; j < 3; j++) 
-			{
-				board[i][j] = '-';				
+		for (int row = 0; row < 3; row++)
+      {  for (int col = 0; col < 3; col++)
+         {
+            this.board[row][col] = '-';				
 			}			
 		}
 	}
@@ -43,9 +42,9 @@ public class TicTacToe {
 	 */
 	public boolean move (int row, int col, char sign) 
 	{
-		if (board[row][col] == '-' ) 
+		if (this.board[row][col] == '-' ) 
 		{
-		   board[row][col] = sign;
+		   this.board[row][col] = sign;
 		  
 			return true;			
 		}
@@ -57,7 +56,7 @@ public class TicTacToe {
 	 * Checks the draw condition
 	 * @return true or false
 	 */
-	public boolean isDraw() 
+	public static boolean isDraw(char[][] board) 
 	{
 	   for (int row = 0; row < 3; row++)
 	   {  for (int col = 0; col < 3; col++)
@@ -70,7 +69,7 @@ public class TicTacToe {
 	   return true;
 	}
 	
-	public boolean isWin()
+	public static boolean isWin(char[][] board)
 	{
 	   for (int index = 0; index < 3; index++)
 	   {
@@ -117,9 +116,9 @@ public class TicTacToe {
 	 * Determines if game is over or nor
 	 * @return true or false
 	 */
-   public boolean isOver() 
+   public static boolean isOver(char[][] board) 
    {
-      if ( isWin() || isDraw() ) 
+      if ( isWin(board) || isDraw(board) ) 
       {
          return true;
       }
