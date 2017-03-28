@@ -7,6 +7,10 @@
  */
 package TicTacToe_AI;
 
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -107,7 +111,125 @@ public class PlayGame
    
    public static void main(String[] args)
    {
-      char signAI, signHuman;
+      char signAI = '-';
+      char signHuman = '-';
+      
+      JButton buttons[][] = new JButton[3][3];
+      
+      JFrame guiFrame = new JFrame("Tic Tac Toa");
+      
+      //make sure the program exits when the frame closes
+      guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
+      
+      JTextPane welcomeText = new JTextPane();        
+      Font font = new Font("Garamond", Font.PLAIN, 24);
+      welcomeText.setFont(font);
+
+      String text = "\t\t  Hello!\n"
+            + "\tWelcome to Tic Tac Toc!\n"
+            + "       Do you want to play as X or O?";
+      
+      welcomeText.setText( text );
+             
+      guiFrame.add(welcomeText, BorderLayout.NORTH);
+      
+      JButton signX = new JButton("X");
+      JButton signO = new JButton("O");
+      
+      JPanel inputPanel = new JPanel();
+      inputPanel.add(signX);
+      inputPanel.add(signO); 
+      
+      guiFrame.add(inputPanel, BorderLayout.CENTER);        
+      
+      // Creating a panel with a box like a tic tac toe board.
+      JPanel boardPanel = new JPanel(); 
+      boardPanel.setLayout (new GridLayout (3, 3));
+      boardPanel.setBorder (BorderFactory.createLineBorder (Color.gray, 3));
+      boardPanel.setBackground (Color.white);
+                     
+      //This will center the JFrame in the middle of the screen
+      guiFrame.setLocationRelativeTo(null);
+      
+      guiFrame.pack();
+      guiFrame.setVisible(true);
+      guiFrame.setSize(400, 350);    
+      
+
+      ActionListener listener = new ActionListener() 
+      {
+         char signOne, signTwo;
+         
+         public void setSignAI (char sign)
+         {
+            signOne = sign;
+         }
+         
+         public char getsignAI ()
+         {
+            return signOne;
+         }
+         
+         @Override
+         public void actionPerformed(ActionEvent e) 
+         {
+             if (e.getSource() instanceof JButton) 
+             {
+                 System.out.println( ((JButton) e.getSource()).getName() );
+                 
+                 if ( signOne == 'x')
+                 {
+                    ((JButton) e.getSource()).setText("X");
+                 }                 
+             }
+         }
+     };
+     
+     for (int row = 0; row < 3; row++)
+     {  for (int col = 0; col < 3; col++)
+        {
+           // Placing the button onto the board
+           buttons[row][col] = new JButton();
+           buttons[row][col].setName(row+ " " + col);
+           buttons[row][col].addActionListener(listener);
+           
+           boardPanel.add(buttons[row][col]);
+        }
+     }
+      
+      signX.addActionListener(new ActionListener()
+      {
+          @Override
+          public void actionPerformed(ActionEvent event)
+          {
+             signHuman = 'x';
+             signAI = 'o';
+             
+             guiFrame.add(boardPanel);            
+             
+             welcomeText.setVisible(false);
+             signX.setVisible(false);
+             signO.setVisible(false);
+          }
+      });
+      
+      signO.addActionListener(new ActionListener()
+      {
+          @Override
+          public void actionPerformed(ActionEvent event)
+          {
+             System.out.println("O was selected!");
+             
+             guiFrame.add(boardPanel, BorderLayout.CENTER);
+             
+             welcomeText.setVisible(false);
+             signX.setVisible(false);
+             signO.setVisible(false);
+          }
+      });
+      
+      
+      
       
       System.out.println ("Welcome to Tic Tac Toe!");      
       
