@@ -7,18 +7,13 @@ import java.awt.event.*;
 @SuppressWarnings("serial")
 public class GUIBoard extends JFrame
 {
-   public static void main(String [] args)
-   {
-      new GUIBoard();
-   }
-
    private JButton btnA1, btnA2, btnA3, btnB1, btnB2, btnB3, btnC1, btnC2, btnC3;
 
    private JButton signX = new JButton("X");
    private JButton signO = new JButton("O");
 
    private JTextPane welcomeText = new JTextPane();    
-   private JPanel panel1 = new JPanel();
+   private JPanel boardPanel = new JPanel();
 
    private char signHuman, signAI;
 
@@ -61,8 +56,8 @@ public class GUIBoard extends JFrame
 
       this.add(inputPanel);		
 
-      panel1.setSize(300,300);
-      panel1.setLayout(new GridLayout(3,3));
+      boardPanel.setSize(300,300);
+      boardPanel.setLayout(new GridLayout(3,3));
 
       btnA1 = createButton();
       btnA2 = createButton();
@@ -84,15 +79,15 @@ public class GUIBoard extends JFrame
       btnC2.setName("21");
       btnC3.setName("22");
 
-      panel1.add(btnA1);
-      panel1.add(btnA2);
-      panel1.add(btnA3);
-      panel1.add(btnB1);
-      panel1.add(btnB2);
-      panel1.add(btnB3);
-      panel1.add(btnC1);
-      panel1.add(btnC2);
-      panel1.add(btnC3);
+      boardPanel.add(btnA1);
+      boardPanel.add(btnA2);
+      boardPanel.add(btnA3);
+      boardPanel.add(btnB1);
+      boardPanel.add(btnB2);
+      boardPanel.add(btnB3);
+      boardPanel.add(btnC1);
+      boardPanel.add(btnC2);
+      boardPanel.add(btnC3);
 
       this.setVisible(true);
 
@@ -118,7 +113,7 @@ public class GUIBoard extends JFrame
          signAI = 'X';        
       }    	 
 
-      this.add(panel1);
+      this.add(boardPanel);
 
       welcomeText.setVisible(false);
       signX.setVisible(false);
@@ -129,8 +124,7 @@ public class GUIBoard extends JFrame
       if (!humanTurn)
       {
          moveAI();
-      }
-     
+      }     
    }
 
    private JButton createButton()
@@ -266,5 +260,10 @@ public class GUIBoard extends JFrame
          humanTurn = false;
          moveAI();
       }
+   }
+   
+   public static void main(String [] args)
+   {
+      new GUIBoard();
    }
 }

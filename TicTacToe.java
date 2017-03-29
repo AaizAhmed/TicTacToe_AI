@@ -11,7 +11,7 @@ public class TicTacToe {
    private char [][] board;	
 
    /**
-    * Constructor:
+    * Constructor: Instantiates a Tic Tac Toe board.
     */
    public TicTacToe () 
    {
@@ -25,6 +25,9 @@ public class TicTacToe {
       }
    }
 
+   /**
+    * This method resets the board to play the game again.
+    */
    public void reset()
    {
       this.board = new char [3][3];
@@ -39,7 +42,7 @@ public class TicTacToe {
 
    /**
     * Copy Constructor
-    * @param t
+    * @param TicTacToe object to be copied
     */
    public TicTacToe (TicTacToe t) 
    {
@@ -65,8 +68,10 @@ public class TicTacToe {
    }
 
    /**
-    * Checks the draw condition
-    * @return true or false
+    * This method checks the draw condition
+    * 
+    * @param   board to be checked
+    * @return  true or false
     */
    public static boolean isDraw(char[][] board) 
    {
@@ -80,7 +85,13 @@ public class TicTacToe {
 
       return true;
    }
-
+   
+   /**
+    * This method checks the win conditions
+    * 
+    * @param   board to be checked
+    * @return  true or false
+    */
    public static boolean isWin(char[][] board)
    {
       for (int index = 0; index < 3; index++)
@@ -125,8 +136,10 @@ public class TicTacToe {
    }
 
    /**
-    * Determines if game is over or nor
-    * @return true or false
+    * This method determines if the game is over or not.
+    * 
+    * @param   board to be checked
+    * @return  true or false
     */
    public static boolean isOver(char[][] board) 
    {
@@ -138,6 +151,11 @@ public class TicTacToe {
       return false;
    }
 
+   /**
+    * This method return a copy of the board.
+    * 
+    * @return  copy of the board 
+    */
    public char[][] getBoard () 
    {
       char temp [][] = board;				
