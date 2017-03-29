@@ -18,12 +18,21 @@ public class GUIBoard extends JFrame
    private char signHuman, signAI;
 
    private TicTacToe board;
-   private SmartPlayer AI; 
+   private SmartPlayer AI;
+   
+   private JFrame message = new JFrame();
+   private int screenWidth, screenHeight;
 
    private boolean humanTurn = false;
 
    public GUIBoard()
-   {
+   {      
+      // This will be used to display messages when game ends
+      Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      screenWidth = (int) screenSize.getWidth() /2;
+      screenHeight = (int) screenSize.getHeight() /2;      
+      message.setLocation(screenWidth-50, screenHeight-300);
+      
       // Set up the grid
       this.setSize(400, 350);
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -187,11 +196,13 @@ public class GUIBoard extends JFrame
             humanTurn = true;
 
             if (TicTacToe.isWin( board.getBoard() ))
-            {
-               JOptionPane.showMessageDialog(null,
+            {               
+               message.setVisible(true);             
+               JOptionPane.showMessageDialog(message,
                   "I beat you!", "Game Over",
-                  JOptionPane.INFORMATION_MESSAGE);
-
+                  JOptionPane.INFORMATION_MESSAGE);               
+               message.setVisible(false);
+               
                resetGame();
                return;
             }
@@ -216,9 +227,11 @@ public class GUIBoard extends JFrame
 
          if (TicTacToe.isWin( board.getBoard() ))
          {
-            JOptionPane.showMessageDialog(null,
+            message.setVisible(true);             
+            JOptionPane.showMessageDialog(message,
                "You beat me!", "Game Over",
-               JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.INFORMATION_MESSAGE);               
+            message.setVisible(false);
 
             resetGame();
             return;
@@ -228,10 +241,12 @@ public class GUIBoard extends JFrame
       moveAI();
       
       if (TicTacToe.isDraw( board.getBoard() ))
-      {         
-         JOptionPane.showMessageDialog(null,
+      {            
+         message.setVisible(true);             
+         JOptionPane.showMessageDialog(message,
             "It's a draw!", "Game Over",
-            JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.INFORMATION_MESSAGE);               
+         message.setVisible(false);
          
          resetGame();
          return;
